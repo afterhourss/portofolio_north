@@ -46,7 +46,7 @@ const brandLogo = [
 					<div class="flex gap-4 justify-between flex-col lg:flex-row">
 						<div class="flex gap-2 flex-wrap">
 							<a href="#target"><Button title="See my projects" bg={true}/></a>
-							<a href="https://drive.google.com/file/d/11C9KY0niwkvNi3RgzBUwR62xy7p_-EB8/view?usp=sharing" target="_blank"><Button title="Download my CV" bg={false}/></a>
+							<a href="https://drive.google.com/file/d/11C9KY0niwkvNi3RgzBUwR62xy7p_-EB8/view?usp=drive_link" target="_blank"><Button title="Download my CV" bg={false}/></a>
 						</div>
 						<div class="flex gap-7 flex-wrap">
 							{brandLogo.map((item) => {
@@ -61,7 +61,7 @@ const brandLogo = [
 	<div id="target">
 		<div class="text-[#9C9C9C] py-10 underline">Project</div>
 		<div class="space-y-10">
-			{projects.map(item => <Projectbar projectName={item.frontmatter.title} subTitle={item.frontmatter.subtitle} image={item.frontmatter.image} desc={item.frontmatter.desc} source={item.frontmatter.url}/>)}
+			{projects.map(item => <Projectbar projectName={item.frontmatter.title} subTitle={item.frontmatter.subtitle} image={item.frontmatter.image} desc={item.frontmatter.desc} source={item.frontmatter.url} type={item.frontmatter.type}/>)}
 		</div>
 	</div>
 	<Footer/>
