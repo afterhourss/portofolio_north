@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button';
+import Projectbar from '../components/Projectbar'
+import treeImage from '../assets/tree.jpg'
+import sassLogo from '../assets/Frame.png'
+import twLogo from '../assets/Frame-1.png'
+import nodeLogo from '../assets/Frame-2.png'
+import reactLogo from '../assets/Frame-3.png'
+import astroLogo from '../assets/Frame-4.png'
+import { Image } from 'astro:assets';
+import Footer from '../components/Footer';
+const projects = await Astro.glob('../contents/projects/*.md')
+const brandLogo = [
+	{
+		name: 'sass',
+		src: sassLogo 
+	},
+	{
+		name: 'tw',
+		src: twLogo
+	},
+	{
+		name: 'node',
+		src: nodeLogo
+	},
+	{
+		name: 'react',
+		src: reactLogo
+	},
+	{
+		name: 'astro',
+		src: astroLogo
+	},
+]
+---
+
+<Layout title="North">
+	<div class="lg:w-[70%] px-5 lg:px-20 mx-auto">
+		<div class="border-b border-[#2C2C2C]">
+			<div class="text-[#9C9C9C] py-10 underline" id="about">About me</div>
+			<div class="flex gap-8 pb-8 flex-col xl:flex-row">	
+				<Image src={treeImage} alt="some tree" class="rounded-md object-cover hidden md:block w-72 h-72" loading='eager'/>
+				<div class="flex flex-col justify-between gap-4">
+					<div class="text-[#5B5B5B] text-xl text-justify"><span class="text-[#9C9C9C]">Hello Im Adipta Bagas</span> An undergraduate Accounting student with a good foundation in financial principles and have a passion for technology. With vocational education and range of skills, Seeking to combine my accounting expertise and tech to contribute. keen interest in leveraging technological solutions to improve business processes.</div>
+					<div class="flex gap-4 justify-between flex-col lg:flex-row">
+						<div class="flex gap-2 flex-wrap">
+							<a href="#target"><Button title="See my projects" bg={true}/></a>
+							<a href="https://drive.google.com/file/d/11C9KY0niwkvNi3RgzBUwR62xy7p_-EB8/view?usp=sharing" target="_blank"><Button title="Download my CV" bg={false}/></a>
+						</div>
+						<div class="flex gap-7 flex-wrap">
+							{brandLogo.map((item) => {
+								return <Image src={item.src} alt="" class="object-contain grayscale-[50%] hover:grayscale-0 transition-all w-10"/>
+							})}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<div id="target">
+		<div class="text-[#9C9C9C] py-10 underline">Project</div>
+		<div class="space-y-10">
+			{projects.map(item => <Projectbar projectName={item.frontmatter.title} subTitle={item.frontmatter.subtitle} image={item.frontmatter.image} desc={item.frontmatter.desc} source={item.frontmatter.url}/>)}
+		</div>
+	</div>
+	<Footer/>
+	</div>
+</Layout>
+<script>
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function(e){
+			e.preventDefault();
+
+			const target = document.querySelector(this.getAttribute('href'));
+
+			if (target) {
+				target.scrollIntoView({behavior: 'smooth'})
+
+
+				setTimeout(() => {
+					target.classList.add('animate-flashOut')
+					setTimeout(() => {
+						target.classList.remove('animate-flashOut')
+					},1000)
+				}, 500)
+			}
+		})
+	})
+</script>
